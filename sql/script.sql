@@ -1,12 +1,14 @@
 --CREATE DATABASE expoagro;
 
---DROP TABLE produto_produtor;
---DROP TABLE produto;
---DROP TABLE produtor;
---DROP TABLE pontuacao_premiacao;
---DROP TABLE premiacao;
---DROP TABLE pontuacao;
---DROP TABLE categoria;
+/*
+DROP TABLE produto_produtor;
+DROP TABLE produto;
+DROP TABLE produtor;
+DROP TABLE pontuacao_premiacao;
+DROP TABLE premiacao;
+DROP TABLE pontuacao;
+DROP TABLE categoria;
+*/
 
 CREATE TABLE categoria (
     id SERIAL,
@@ -22,11 +24,11 @@ CREATE TABLE pontuacao (
     categoria INTEGER NOT NULL
 );
 ALTER TABLE pontuacao ADD CONSTRAINT pk_pontuacao PRIMARY KEY (id);
-ALTER TABLE pontuacao ADD CONSTRAINT uq_pontuacao_catcolocacao UNIQUE (categoria, 
-    colocacao);
-ALTER TABLE pontuacao ADD CONSTRAINT fk_pontuacao_categoria FOREIGN KEY 
-    (categoria) REFERENCES categoria (id) ON UPDATE CASCADE ON DELETE
-    CASCADE;
+ALTER TABLE pontuacao ADD CONSTRAINT uq_pontuacao_catcolocacao UNIQUE 
+    (categoria, colocacao);
+ALTER TABLE pontuacao ADD CONSTRAINT fk_pontuacao_categoria
+    FOREIGN KEY (categoria) REFERENCES categoria (id)
+    ON UPDATE CASCADE ON DELETE CASCADE;
 
 CREATE TABLE premiacao (
     id SERIAL,
@@ -40,11 +42,11 @@ CREATE TABLE pontuacao_premiacao (
     pontuacao INTEGER,
     premiacao INTEGER
 );
-ALTER TABLE pontuacao_premiacao ADD CONSTRAINT pk_pontuacao_premiacao 
-    PRIMARY KEY (pontuacao, premiacao);
+ALTER TABLE pontuacao_premiacao ADD CONSTRAINT pk_pontpremiacao PRIMARY KEY
+    (pontuacao, premiacao);
 ALTER TABLE pontuacao_premiacao ADD CONSTRAINT fk_pontpremiacao_pontuacao
-    FOREIGN KEY (pontuacao) REFERENCES pontuacao (id) ON UPDATE
-    CASCADE ON DELETE CASCADE;
+    FOREIGN KEY (pontuacao) REFERENCES pontuacao (id)
+    ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE pontuacao_premiacao ADD CONSTRAINT fk_pontpremiacao_premiacao
     FOREIGN KEY (premiacao) REFERENCES premiacao (id);
 
@@ -63,17 +65,18 @@ CREATE TABLE produto (
 );
 ALTER TABLE produto ADD CONSTRAINT pk_produto PRIMARY KEY (id);
 ALTER TABLE produto ADD CONSTRAINT uq_produto_nome UNIQUE (nome);
-ALTER TABLE produto ADD CONSTRAINT fk_produto_categoria FOREIGN KEY (categoria) 
-    REFERENCES categoria (id) ON UPDATE CASCADE ON DELETE SET NULL;
+ALTER TABLE produto ADD CONSTRAINT fk_produto_categoria
+    FOREIGN KEY (categoria) REFERENCES categoria (id)
+    ON UPDATE CASCADE ON DELETE SET NULL;
 
 CREATE TABLE produto_produtor (
     produto INTEGER,
     produtor INTEGER,
     classificacao CHAR(1)
 );
-ALTER TABLE produto_produtor ADD CONSTRAINT pk_produto_produtor PRIMARY 
-    KEY (produto, id_produtor);
-ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produto FOREIGN
-    KEY (produto) REFERENCES produto (id);
-ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produtor FOREIGN
-    KEY (produtor) REFERENCES produtor (id);	
+ALTER TABLE produto_produtor ADD CONSTRAINT pk_prodprodutor PRIMARY KEY
+    (produto, produtor);
+ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produto
+    FOREIGN KEY (produto) REFERENCES produto (id);
+ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produtor
+    FOREIGN KEY (produtor) REFERENCES produtor (id);	
