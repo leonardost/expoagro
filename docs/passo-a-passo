@@ -1,0 +1,11 @@
+Alterar senha do usuário 'postgres':
+    sudo -u postgres psql postgres
+    \password postgres
+    (coloque a senha 'postgres')
+
+Executar o script do banco:
+    sudo -u postgres psql
+    CREATE DATABASE expoagro;
+    \q
+    sudo -u postgres psql -d expoagro < script.sql
+
