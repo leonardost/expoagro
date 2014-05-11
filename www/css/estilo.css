@@ -1,0 +1,54 @@
+*, body {
+    margin: 0; padding: 0;
+    font-family: helvetica, verdana, arial;
+}
+
+body {
+    margin:30px;
+    background-color: #9C3;
+}
+
+#login {
+    width: 400px; padding:20px;
+    margin: 0 auto 0 auto;
+    border: 2px solid #390;
+    background-color: #FFF;
+    text-align:center;
+}
+
+#login h2 {
+    margin-bottom:1.5em;
+    color: #030;
+}
+
+#login p {
+    margin-top: 1.5em;
+}
+
+#login p.erro {
+    color: red;
+}
+
+main {
+    width:600px; padding:20px;
+    margin: 0 auto 0 auto;
+    border: 2px solid #390;
+    background-color: #FFF;
+}
+
+main ul {
+    margin-left: 30px;
+}
+
+main .deslogar {
+    margin-bottom: 2em;
+    text-align: right;
+}
+
+a {
+    color: #390;
+}
+
+a:visited {
+    color: #030;
+}
