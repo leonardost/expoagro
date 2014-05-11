@@ -1,34 +1,28 @@
 <?php
 
-	// Apenas testando, MD5 não deve ser usado para processar senhas
-	$md5hash = '5166bc207a30cd8d95ab9cfd532b0a7e';
-	$salt1 = 'TAKpH5GM';
-	$salt2 = 'k6gwCmFh';
+    session_start();
 
-	if (!empty($_POST['senha'])) {
-		if (md5(md5(md5($salt1 . $_POST['senha'] . $salt2))) === $md5hash) {
-			die("Logado!");
-		}
-		else {
-			die("Senha incorreta! Tente novamente.");
-		}
-	}
+    if (empty($_SESSION['logado'])) {
+        header('Location: login.php');
+        exit;
+    }
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <title>Expoagro</title>
     <meta charset="UTF-8">
+    <link type="text/css" href="css/estilo.css" rel="stylesheet">
 </head>
 <body>
 
-    <a href="index.php">Página de testes</a>
-    
-    <form action="index.php" method="post">
-		<input name="senha" type="password">
-		<input name="submit" type="submit" value="Fazer login">
-    </form>
+	<main>
+        <p class="deslogar"><a href="deslogar.php">Deslogar</a></p>
+		<ul>
+			<li><a href="teste.php">Página de testes</a></li>
+		</ul>
+    </main>
 
 </body>
 </html>
