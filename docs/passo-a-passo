@@ -1,11 +1,84 @@
-Alterar senha do usuário 'postgres':
+ACESSAR MÁQUINA VIRTUAL:
+* Máquina virtual está rodando Ubuntu.
+- Fazer ssh utilizando um terminal ou uma ferramenta como o Putty.
+    host: localhost
+    porta: 2222
+    usuário: vagrant
+    senha: vagrant
+* O caminho da pasta compartilhada é '/vagrant'.
+
+
+----------------
+ BANCO DE DADOS
+----------------
+
+ALTERAR A SENHA DO USUÁRIO 'postgres':
     sudo -u postgres psql postgres
     \password postgres
     (coloque a senha 'postgres')
+    \q
 
-Executar o script do banco:
+
+CRIAR BANCO DE DADOS:
+* Só precisa ser feito uma vez e já foi feito na imagem que estamos utilizando.
     sudo -u postgres psql
     CREATE DATABASE expoagro;
     \q
-    sudo -u postgres psql -d expoagro < script.sql
 
+
+EXECUTAR SCRIPTS '.sql':
+* Substituir 'nome-do-script' pelo nome adequado.
+    sudo -u postgres psql -d expoagro < /vagrant/sql/nome-do-script.sql
+
+
+USAR PGADMIN3 PARA ACESSAR POSTGRESQL DA MÁQUINA VIRTUAL:
+- Instalar o pgadmin3.
+- Descomentar e alterar a linha abaixo no arquivo
+'/etc/postgresql/9.1/main/postgresql.conf'.
+    listen_addresses = '*'
+- Acrescentar a linha abaixo ao arquivo '/etc/postgresql/9.1/main/pg_hba.conf'.
+    host    all    all    10.0.0.0/16    md5
+- Reiniciar o PostgreSQL com o comando abaixo.
+    sudo service postgresql restart
+
+
+--------------------
+ INSTALAÇÃO INICIAL
+--------------------
+
+CONFIGURAÇÕES DO VIRTUALBOX, VAGRANT, APACHE, PHP E POSTGRESQL PELO WINDOWS:
+* Só precisa ser feito uma vez e já foi feito na imagem que estamos utilizando.
+- Instalar virtualbox.
+- Instalar vagrant.
+- Fazer download de uma imagem limpa do Ubuntu.
+- Abrir prompt e executar o comando abaixo (vm-name.box se refere a uma imagem
+limpa do Ubuntu).
+    vagrant box add --name expoagro <vm-name.box>
+- Entrar na pasta que será compartilhada com a máquina virtual (no nosso caso, a
+mesma pasta em que estamos fazendo o controle de versão pelo git).
+    vagrant init expoagro
+- Modificar arquivo de configuração do vagrant (Vagrantfile) para fazer o 
+redirecionamento de portas e mapear a porta do computador para a máquina 
+virtual. Descomentar a linha abaixo.
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+- Executar o comando abaixo.
+    vagrant update
+- Acessar a máquina virtual por ssh.
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    sudo apt-get install -y postgresql (apertar tab para autocompletar a versão)
+    sudo apt-get install -y apache2-mpm-worker libapache2-mod-fastcgi php5-fpm php5 php5-pgsql
+    sudo a2enmod actions fastcgi alias
+    cd /etc/apache2/conf.d/
+    sudo nano php5-fpm.conf
+        <IfModule mod_fastcgi.c>
+            AddHandler php5-fcgi .php
+            Action php5-fcgi /php5-fcgi
+            Alias /php5-fcgi /usr/lib/cgi-bin/php5-fcgi
+            FastCgiExternalServer /usr/lib/cgi-bin/php5-fcgi -host 127.0.0.1:9000 -pass-header Authorization
+        </IfModule>
+    sudo nano /var/www/info.php
+        <?php infophp();
+    sudo service apache2 restart
+    sudo service php5-fpm restart
+- Abrir navegador e testar
