@@ -1,14 +1,16 @@
+/* 
+Script para criação do banco de dados no PostgreSQL.
+*/
+
 --CREATE DATABASE expoagro;
 
-/*
-DROP TABLE produto_produtor;
-DROP TABLE produto;
-DROP TABLE produtor;
-DROP TABLE pontuacao_premiacao;
-DROP TABLE premiacao;
-DROP TABLE pontuacao;
-DROP TABLE categoria;
-*/
+DROP TABLE IF EXISTS produto_produtor;
+DROP TABLE IF EXISTS produto;
+DROP TABLE IF EXISTS produtor;
+DROP TABLE IF EXISTS pontuacao_premiacao;
+DROP TABLE IF EXISTS premiacao;
+DROP TABLE IF EXISTS pontuacao;
+DROP TABLE IF EXISTS categoria;
 
 CREATE TABLE categoria (
     id SERIAL,
@@ -40,7 +42,8 @@ ALTER TABLE premiacao ADD CONSTRAINT uq_premiacao_premio UNIQUE (premio);
 
 CREATE TABLE pontuacao_premiacao (
     pontuacao INTEGER,
-    premiacao INTEGER
+    premiacao INTEGER,
+    quantidade INTEGER
 );
 ALTER TABLE pontuacao_premiacao ADD CONSTRAINT pk_pontpremiacao PRIMARY KEY
     (pontuacao, premiacao);
