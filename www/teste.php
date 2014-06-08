@@ -13,7 +13,7 @@
             border: 1px solid #000;
         }
         table th, table td {
-            padding:5px;
+            padding: 5px;
             background-color: #BBB;
             border: 1px solid #000;
         }

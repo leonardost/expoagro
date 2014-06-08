@@ -39,7 +39,7 @@
         <label for="senha">Senha</label>
         <input id="senha" type="password" name="senha" autofocus="autofocus"></input>
         <input type="submit" value="Logar"></input>
-<?php if ($erros['login'] == true) { ?>
+<?php if ($erros['login'] === true) { ?>
         <p class="erro">Senha inválida. Tente novamente</p>
 <?php } ?>
         

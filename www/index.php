@@ -17,12 +17,13 @@
 </head>
 <body>
 
-	<main>
+    <section>
         <p class="deslogar"><a href="deslogar.php">Deslogar</a></p>
-		<ul>
-			<li><a href="teste.php">Página de testes</a></li>
-		</ul>
-    </main>
+        <ul>
+            <li><a href="categoria.php">Categorias</a></li>
+            <li><a href="teste.php">Página de testes</a></li>
+        </ul>
+    </section>
 
 </body>
 </html>

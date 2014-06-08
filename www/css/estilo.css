@@ -25,22 +25,26 @@ body {
     margin-top: 1.5em;
 }
 
-#login p.erro {
+.erro {
     color: red;
 }
 
-main {
-    width:600px; padding:20px;
+section {
+    width: 90%; padding: 20px;
     margin: 0 auto 0 auto;
     border: 2px solid #390;
     background-color: #FFF;
 }
 
-main ul {
+section h1 {
+    margin-bottom: 1.5em;
+}
+
+section ul {
     margin-left: 30px;
 }
 
-main .deslogar {
+section .deslogar {
     margin-bottom: 2em;
     text-align: right;
 }
@@ -51,4 +55,23 @@ a {
 
 a:visited {
     color: #030;
+}
+
+table {
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+th, td {
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+th {
+	font-weight: bold;
+    background-color: #0D9;
+}
+
+form {
+    margin-bottom: 1.5em;
 }
