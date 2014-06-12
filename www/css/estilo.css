@@ -16,9 +16,13 @@ body {
     text-align:center;
 }
 
-#login h2 {
-    margin-bottom:1.5em;
+h2 {
+    margin-bottom: 1.5em;
     color: #030;
+}
+
+h3 {
+	margin-bottom: 1.2em;
 }
 
 #login p {
@@ -57,7 +61,12 @@ a:visited {
     color: #030;
 }
 
+p {
+	margin-bottom: 1.5em;
+}
+
 table {
+	margin-bottom: 2em;
     border-collapse: collapse;
     border: 1px solid #000;
 }
