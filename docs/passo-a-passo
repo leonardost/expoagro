@@ -7,6 +7,15 @@ ACESSAR MÁQUINA VIRTUAL:
     senha: vagrant
 * O caminho da pasta compartilhada é '/vagrant'.
 
+********************************
+ PARA RODAR O BRANCH 'mvc_test'
+********************************
+- Logar na máquina virtual:
+      vagrant ssh
+- Executar o seguinte comando:
+      sudo a2enmod rewrite
+- No arquivo /etc/apache2/sites-available/default, alterar a linha 11 ('AllowOverride none', dentro da diretiva
+  '<Directory /var/www/>'), para 'AllowOverride all'
 
 ----------------
  BANCO DE DADOS
