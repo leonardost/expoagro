@@ -1,11 +1,50 @@
 <?php
 
-require_once(realpath($_SERVER['DOCUMENT_ROOT']) . '/controle/controle.php');
+class IndexControle extends Controle {
 
-class TesteControle extends Controle {
-	
-	public function executar() {
-		
+    public function __construct() {
+        parent::__construct();
+    }
+
+    public function login() {
+		// Apenas testando, MD5 não deve ser usado para processar senhas
+		$md5hash = '5166bc207a30cd8d95ab9cfd532b0a7e';
+		$salt1 = 'TAKpH5GM';
+		$salt2 = 'k6gwCmFh';
+
+		$erros = array();
+		if (!empty($_POST['senha'])) {
+			if (md5(md5(md5($salt1 . $_POST['senha'] . $salt2))) === $md5hash) {
+				// Seta a flag 'logado' e move o navegador para a página index
+				$_SESSION['logado'] = true;
+				header('Location: /index/');
+				exit;
+			}
+			else {
+				$erros['login'] = true;
+			}
+		}
+
+        $this->associar_visao('index/login');
+		if (!empty($erros['login']) && $erros['login'] === true) {
+			$this->visao->substituir_secao('{MENSAGEM_ERRO}', '<p class="erro">Senha inválida. Tente novamente</p>');
+		}
+		else {
+			$this->visao->substituir_secao('{MENSAGEM_ERRO}', '');
+		}
+		$this->visao->gerar();
+
+    }
+
+	public function deslogar() {
+		session_destroy();
+		$_SESSION = array();
+		header('Location: /');
+	}
+
+    // Página de testes
+    public function teste() {
+
 		// Array que guarda os erros que aconteceram
 		$erros = array();
 
@@ -128,6 +167,9 @@ class TesteControle extends Controle {
 
 		pg_close($this->conexao);
 
+        $this->associar_visao('index/teste');
+        $this->visao->substituir_secao_arquivo('{MENU}', 'menu.htm');
+
 		if (!empty($erros['conexao'])) {
 			$this->visao->substituir_secao('{ERRO}', '<h2>Problema com a conexao!</h2>');
 		}
@@ -144,7 +186,12 @@ class TesteControle extends Controle {
 		}
 		
 		$this->visao->gerar();
+    }
 
+	public function index() {
+        $this->associar_visao('index/index');
+        $this->visao->substituir_secao_arquivo('{MENU}', 'menu.htm');
+		$this->visao->gerar();
 	}
-	
+
 }

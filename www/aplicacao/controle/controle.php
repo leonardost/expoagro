@@ -1,8 +1,5 @@
 <?php
 
-require_once(realpath($_SERVER['DOCUMENT_ROOT']) . '/modelo/conexao.php');
-require_once(realpath($_SERVER['DOCUMENT_ROOT']) . '/visao/visao.php');
-
 abstract class Controle {
 	
 	protected $visao;
@@ -15,13 +12,11 @@ abstract class Controle {
 	public function __destruct() {
 		desconectar($this->conexao);
 	}
-	
+
 	public function associar_visao($pagina) {
-		if (!empty($pagina)) {
-			$this->visao = new Visao($pagina);
-		}
+        $this->visao = new Visao($pagina);
 	}
-	
-	public abstract function executar();
+
+    public abstract function index();
 
 }

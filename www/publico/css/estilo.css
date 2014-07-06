@@ -33,6 +33,37 @@ h3 {
     color: red;
 }
 
+/* Menu */
+
+nav {
+    margin-bottom: 30px;
+}
+
+nav li, nav li a {
+    padding: 10px;
+    display: block;
+    float: left;
+    text-decoration: none;
+}
+
+nav li a {
+    border: 1px solid #000;
+}
+
+nav li a:hover {
+    background-color: #0F0;
+}
+
+nav li.deslogar {
+    float: right;
+}
+
+nav br {
+    clear: both
+}
+
+/* Seção principal */
+
 section {
     width: 90%; padding: 20px;
     margin: 0 auto 0 auto;
@@ -42,15 +73,6 @@ section {
 
 section h1 {
     margin-bottom: 1.5em;
-}
-
-section ul {
-    margin-left: 30px;
-}
-
-section .deslogar {
-    margin-bottom: 2em;
-    text-align: right;
 }
 
 a {

@@ -2,17 +2,11 @@
 
 function conectar() {
 
-	$host = 'localhost';
-	$port = '5432';
-	$dbname = 'expoagro';
-	$user = 'postgres';
-	$pass = 'postgres';
-
-	$string_conexao = "host=$host
-		port=$port
-		dbname=$dbname
-		user=$user
-		password=$pass";
+	$string_conexao = "host=" . HOST .
+		" port=" . PORT .
+		" dbname=" . DBNAME .
+		" user=" . USER .
+		" password=" . PASS;
 
 	$conexao = pg_connect($string_conexao);
 

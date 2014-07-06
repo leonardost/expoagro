@@ -7,6 +7,7 @@ ACESSAR MÁQUINA VIRTUAL:
     senha: vagrant
 * O caminho da pasta compartilhada é '/vagrant'.
 
+
 ********************************
  PARA RODAR O BRANCH 'mvc_test'
 ********************************
@@ -16,6 +17,7 @@ ACESSAR MÁQUINA VIRTUAL:
       sudo a2enmod rewrite
 - No arquivo /etc/apache2/sites-available/default, alterar a linha 11 ('AllowOverride none', dentro da diretiva
   '<Directory /var/www/>'), para 'AllowOverride all'
+
 
 ----------------
  BANCO DE DADOS
@@ -31,7 +33,7 @@ ALTERAR A SENHA DO USUÁRIO 'postgres':
 CRIAR BANCO DE DADOS:
 * Só precisa ser feito uma vez e já foi feito na imagem que estamos utilizando.
     sudo -u postgres psql
-    CREATE DATABASE expoagro;
+    CREATE DATABASE expoagro WITH encoding='utf-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
     \q
 
 
