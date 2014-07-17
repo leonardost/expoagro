@@ -2,7 +2,7 @@
 Script para criação do banco de dados no PostgreSQL.
 */
 
---CREATE DATABASE expoagro;
+--CREATE DATABASE expoagro WITH encoding='utf-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
 
 DROP TABLE IF EXISTS produto_produtor;
 DROP TABLE IF EXISTS produto;

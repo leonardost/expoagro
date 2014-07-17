@@ -1,0 +1,108 @@
+*, body {
+    margin: 0; padding: 0;
+    font-family: helvetica, verdana, arial;
+}
+
+body {
+    margin:30px;
+    background-color: #9C3;
+}
+
+#login {
+    width: 400px; padding:20px;
+    margin: 0 auto 0 auto;
+    border: 2px solid #390;
+    background-color: #FFF;
+    text-align:center;
+}
+
+h2 {
+    margin-bottom: 1.5em;
+    color: #030;
+}
+
+h3 {
+	margin-bottom: 1.2em;
+}
+
+#login p {
+    margin-top: 1.5em;
+}
+
+.erro {
+    color: red;
+}
+
+/* Menu */
+
+nav {
+    margin-bottom: 30px;
+}
+
+nav li, nav li a {
+    padding: 10px;
+    display: block;
+    float: left;
+    text-decoration: none;
+}
+
+nav li a {
+    border: 1px solid #000;
+}
+
+nav li a:hover {
+    background-color: #0F0;
+}
+
+nav li.deslogar {
+    float: right;
+}
+
+nav br {
+    clear: both
+}
+
+/* Seção principal */
+
+section {
+    width: 90%; padding: 20px;
+    margin: 0 auto 0 auto;
+    border: 2px solid #390;
+    background-color: #FFF;
+}
+
+section h1 {
+    margin-bottom: 1.5em;
+}
+
+a {
+    color: #390;
+}
+
+a:visited {
+    color: #030;
+}
+
+p {
+	margin-bottom: 1.5em;
+}
+
+table {
+	margin-bottom: 2em;
+    border-collapse: collapse;
+    border: 1px solid #000;
+}
+
+th, td {
+    padding: 5px;
+    border: 1px solid #000;
+}
+
+th {
+	font-weight: bold;
+    background-color: #0D9;
+}
+
+form {
+    margin-bottom: 1.5em;
+}
