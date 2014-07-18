@@ -2,10 +2,6 @@
 
 class ProdutorModelo {
 
-	private $conexao = null;
-	private $nome = null;
-	private $endereco = null;
-
 	function __construct($conexao) {
 		$this->conexao = $conexao;
 	}
@@ -22,12 +18,12 @@ class ProdutorModelo {
 		return executar_sql($this->conexao, "INSERT INTO produtor (id, nome, endereco) VALUES ($id, '$nome', '$endereco')");
 	}
 
-	public function editar($id, $nome, $endereco) {
-		return executar_sql($this->conexao, "UPDATE produtor SET nome = '$nome', endereco = '$endereco' WHERE id = $id");
+	public function editar($nome, $endereco) {
+		return executar_sql($this->conexao, "UPDATE produtor SET nome = '$nome', endereco = '$endereco' WHERE id = $this->id");
 	}
 
-	public function remover($id) {
-		return executar_sql($this->conexao, "DELETE from produtor WHERE id = $id");
+	public function remover() {
+		return executar_sql($this->conexao, "DELETE from produtor WHERE id = $this->id");
 	}
 
 	public function todos() {

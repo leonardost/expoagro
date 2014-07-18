@@ -74,12 +74,11 @@ class ProdutorControle extends Controle {
 			}
 			// Mudança submetida
 			else {
-				$id = $_POST['id'];
 				$erros['nome'] = !$this->valida_campo_obrigatorio('nome', $nome);
 				$erros['endereco'] = !$this->valida_campo_obrigatorio('endereco', $endereco);
 
 				if (!$erros['nome'] && !$erros['endereco']) {
-					$this->modelo->editar($id, $nome, $endereco);
+					$this->modelo->editar($nome, $endereco);
 					// TODO: Tratar erro se acontecer
 					header('Location: /produtor/');
 				}
@@ -104,7 +103,7 @@ class ProdutorControle extends Controle {
 	
 	public function remover($id) {
 		if ($this->modelo->buscar($id)) {
-			$this->modelo->remover($id);
+			$this->modelo->remover();
 		}
 		else {
 			// TODO: Exibir msg "Não existe produtor com id = $id." ?
