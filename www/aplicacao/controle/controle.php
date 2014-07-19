@@ -12,7 +12,7 @@ abstract class Controle {
 	public function __destruct() {
 		desconectar($this->conexao);
 	}
-
+	
 	public function associar_visao($pagina) {
         $this->visao = new Visao($pagina);
 	}
