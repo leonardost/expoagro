@@ -50,8 +50,18 @@ class PontuacaoControle extends Controle {
 
 		if (!empty($_POST)) {
 			$erros['categoria'] = !$this->valida_campo_obrigatorio('categoria', $categoria);
-			$erros['colocacao'] = !$this->valida_campo_obrigatorio('colocacao', $colocacao);
-			$erros['pontos'] = !$this->valida_campo_obrigatorio('pontos', $pontos);
+
+			$expr = '/^[1-9;A-Z;a-z]$/';
+			$erros['colocacao'] =
+				!$this->valida_campo_obrigatorio('colocacao', $colocacao) ||
+				!preg_match($expr, $colocacao);
+
+			$expr = '/^[1-9][0-9]*$/';
+			$erros['pontos'] =
+				!$this->valida_campo_obrigatorio('pontos', $pontos) ||
+				!preg_match($expr, $pontos) ||
+				!filter_var($pontos, FILTER_VALIDATE_INT);
+
 			if (!$erros['categoria'] && !$erros['colocacao'] && !$erros['pontos']) {
 				$this->modelo->inserir('default', $categoria, $colocacao, $pontos);
 				// TODO: Mostrar erro se acontecer
@@ -78,10 +88,10 @@ class PontuacaoControle extends Controle {
 			$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Categoria não selecionada!</p>\n");
 		}
 		elseif ($erros['colocacao']) {
-			$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Colocação vazia!</p>\n");
+			$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Colocação é obrigatória e deve ser um caractere alfanumérico!</p>\n");
 		}
 		elseif ($erros['pontos']) {
-			$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Pontos vazio!</p>\n");
+			$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Pontos é obrigatório e deve ser um número entre 1 e 999!</p>\n");
 		}
 		$this->visao->gerar();
 
@@ -106,8 +116,17 @@ class PontuacaoControle extends Controle {
 			// Mudança submetida
 			else {
 				$erros['categoria'] = !$this->valida_campo_obrigatorio('categoria', $categoria);
-				$erros['colocacao'] = !$this->valida_campo_obrigatorio('colocacao', $colocacao);
-				$erros['pontos'] = !$this->valida_campo_obrigatorio('pontos', $pontos);
+
+				$expr = '/^[1-9;A-Z;a-z]$/';
+				$erros['colocacao'] =
+					!$this->valida_campo_obrigatorio('colocacao', $colocacao) ||
+					!preg_match($expr, $colocacao);
+
+				$expr = '/^[1-9][0-9]*$/';
+				$erros['pontos'] =
+					!$this->valida_campo_obrigatorio('pontos', $pontos) ||
+					!preg_match($expr, $pontos) ||
+					!filter_var($pontos, FILTER_VALIDATE_INT);
 
 				if (!$erros['categoria'] && !$erros['colocacao'] && !$erros['pontos']) {
 					$this->modelo->editar($categoria, $colocacao, $pontos);
@@ -124,10 +143,10 @@ class PontuacaoControle extends Controle {
 				$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Categoria não pode ser vazia!</p>\n");
 			}
 			elseif ($erros['colocacao']) {
-				$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Colocação não pode ser vazia!</p>\n");
+				$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Colocação é obrigatória e deve ser um caractere alfanumérico!</p>\n");
 			}
 			elseif ($erros['pontos']) {
-				$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Pontos não pode ser vazio!</p>\n");
+				$this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Pontos é obrigatório e deve ser um número entre 1 e 999!</p>\n");
 			}
 			$this->visao->substituir_secao('{ID}', $id);
 			$this->visao->substituir_secao('{COLOCACAO}', $colocacao);
