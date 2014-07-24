@@ -4,9 +4,9 @@ class CategoriaModelo {
 
     private $conexao = null;
 
-	function __construct($conexao) {
-		$this->conexao = $conexao;
-	}
+    function __construct($conexao) {
+        $this->conexao = $conexao;
+    }
 
     public function inserir($id, $nome) {
         $resultado = executar_sql($this->conexao, 'INSERT INTO categoria (id, nome) VALUES (' . $id . ', \'' . $_POST['nome'] . '\')');
@@ -18,9 +18,9 @@ class CategoriaModelo {
         return $resultado;
     }
 
-	public function todos() {
-		$resultado = executar_sql($this->conexao, "SELECT id, nome FROM categoria ORDER BY nome");
-		return $resultado;
-	}
+    public function todos() {
+        $resultado = executar_sql($this->conexao, "SELECT id, nome FROM categoria ORDER BY nome");
+        return $resultado;
+    }
 
 };

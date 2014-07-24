@@ -1,4 +1,7 @@
-ACESSAR MÁQUINA VIRTUAL:
+-------------------------
+ ACESSAR MÁQUINA VIRTUAL
+-------------------------
+
 * Máquina virtual está rodando Ubuntu.
 - Fazer ssh utilizando um terminal ou uma ferramenta como o Putty.
     host: localhost
@@ -52,6 +55,20 @@ USAR PGADMIN3 PARA ACESSAR POSTGRESQL DA MÁQUINA VIRTUAL:
     host    all    all    10.0.0.0/16    md5
 - Reiniciar o PostgreSQL com o comando abaixo.
     sudo service postgresql restart
+
+
+MODIFICAR O ENCODING DO POSTGRESQL 9.1 DE LATIN1 PARA UTF-8
+
+- Configurar para permitir locale pt_BR.UTF-8
+    sudo locale-gen --no-purge --lang pt_BR
+- Modificar o encoding do sistema operacional
+    export LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8
+    sudo update-locale LANG=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8
+- Para destruir o cluster padrão, digite o comando abaixo(9.1 é a versão do PostgreSQL):
+    sudo pg_dropcluster –stop 9.1 main
+- Para criar o novo cluster padrão digite:
+    sudo pg_createcluster -e UTF-8 –start 9.1 main
+- Fonte: http://blog.tartigrado.com/?p=69
 
 
 --------------------

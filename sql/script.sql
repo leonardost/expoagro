@@ -2,7 +2,7 @@
 Script para criação do banco de dados no PostgreSQL.
 */
 
---CREATE DATABASE expoagro WITH encoding='utf-8' lc_collate='en_US.utf8' lc_ctype='en_US.utf8' template template0;
+--CREATE DATABASE expoagro;
 
 DROP TABLE IF EXISTS produto_produtor;
 DROP TABLE IF EXISTS produto;
@@ -82,4 +82,4 @@ ALTER TABLE produto_produtor ADD CONSTRAINT pk_prodprodutor PRIMARY KEY
 ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produto
     FOREIGN KEY (produto) REFERENCES produto (id);
 ALTER TABLE produto_produtor ADD CONSTRAINT fk_prodprodutor_produtor
-    FOREIGN KEY (produtor) REFERENCES produtor (id);	
+    FOREIGN KEY (produtor) REFERENCES produtor (id);    

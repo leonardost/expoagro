@@ -22,7 +22,7 @@ h2 {
 }
 
 h3 {
-	margin-bottom: 1.2em;
+    margin-bottom: 1.2em;
 }
 
 #login p {
@@ -84,11 +84,11 @@ a:visited {
 }
 
 p {
-	margin-bottom: 1.5em;
+    margin-bottom: 1.5em;
 }
 
 table {
-	margin-bottom: 2em;
+    margin-bottom: 2em;
     border-collapse: collapse;
     border: 1px solid #000;
 }
@@ -99,7 +99,7 @@ th, td {
 }
 
 th {
-	font-weight: bold;
+    font-weight: bold;
     background-color: #0D9;
 }
 

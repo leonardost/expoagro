@@ -1,6 +1,6 @@
 <?php
 
-	// Define a raiz do servidor (/var/www, http://localhost, etc.)
+    // Define a raiz do servidor (/var/www, http://localhost, etc.)
     define('ROOT', realpath($_SERVER['DOCUMENT_ROOT']));
 
     // Constantes para o banco de dados

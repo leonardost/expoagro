@@ -43,7 +43,7 @@
         $uri = explode('?', $_SERVER['REQUEST_URI'], 2);
         $caminho = $uri[0];
         $argumentos_get = $uri[1];
-	
+    
         // Remove '/' inicial
         if (strpos($caminho, '/') === 0) {
             $caminho = substr($caminho, 1);
