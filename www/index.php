@@ -42,7 +42,9 @@
         // Remove agumentos GET
         $uri = explode('?', $_SERVER['REQUEST_URI'], 2);
         $caminho = $uri[0];
-        $argumentos_get = $uri[1];
+        if (!empty($uri[1])) {
+            $argumentos_get = $uri[1];
+        }
 	
         // Remove '/' inicial
         if (strpos($caminho, '/') === 0) {
@@ -67,6 +69,7 @@
     require_once(ROOT . '/aplicacao/controle/' . $pagina_atual . '.php');
     // Os controles se chamam IndexControle, CategoriaControle, etc.
     $classe = ucfirst($pagina_atual) . 'Controle';
+    $classe = str_replace("_", "", $classe);  // TODO: Refatorar, pensar qual melhor forma de noemar classes com nomes compostos
     $controle = new $classe();
 
 //    echo("Paǵina atual = " . $pagina_atual);  // TODO: Mover para log

@@ -1,0 +1,18 @@
+<section>
+
+    {MENU}
+
+    <h1>Editar Pontuação x Premiação</h1>
+
+    <form action="#" method="post">
+        <p>Categoria e colocação: <b>{CATEGORIA_COLOCACAO}</b></p>
+        <p>Prêmios:</p>
+        {LISTA_PREMIOS}
+        {ERRO}
+        <input type="hidden" name="pontuacao" value="{ID_PONTUACAO}">
+        <input type="submit" value="Salvar">
+    </form>
+
+    <a href="/pontuacao_premiacao/">Cancelar</a>
+
+</section>
