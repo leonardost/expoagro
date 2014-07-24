@@ -228,17 +228,6 @@ class PontuacaoPremiacaoControle extends Controle {
         }
         $conteudo .= "</table>";
 
-        //~ foreach ($lista_premios_por_categoria_colocacao as $id => $premios) {
-            //~ $conteudo .= "<ul class=\"lista\"><li>Categoria " . $premios['categoria'] . ", colocação " . $premios['colocacao'] .
-                //~ " [<a href=\"/pontuacao_premiacao/editar/$id/\">editar</a>]" .
-                //~ " [<a href=\"/pontuacao_premiacao/remover/$id/\">remover</a>]\n" .
-                //~ "<ul>\n";
-            //~ foreach ($premios['premios'] as $premio) {
-                //~ $conteudo .= "<li>$premio[0] - $premio[1]</li>\n";
-            //~ }
-            //~ $conteudo .= "</ul></li></ul>\n";
-        //~ }
-
         $this->associar_visao('pontuacao_premiacao/index');
         $this->visao->substituir_secao_arquivo('{MENU}', 'menu.htm');
         $this->visao->substituir_secao('{LISTA}', $conteudo);
