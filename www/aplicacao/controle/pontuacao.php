@@ -3,12 +3,15 @@
 class PontuacaoControle extends Controle {
 
     private $modelo;
+    private $modelo_categoria;
 
     public function __construct() {
         parent::__construct();
 
         require_once(ROOT . '/aplicacao/modelo/pontuacao.php');
         $this->modelo = new PontuacaoModelo($this->conexao);
+        require_once(ROOT . '/aplicacao/modelo/categoria.php');
+        $this->modelo_categoria = new CategoriaModelo($this->conexao);
     }
 
     private function valida_campo_obrigatorio($nome_campo, &$valor_campo) {
@@ -19,27 +22,6 @@ class PontuacaoControle extends Controle {
             $valor_campo = $_POST[$nome_campo];
             return true;
         }
-    }
-
-    private function monta_dropdown_categoria($categoria) {
-        require_once(ROOT . '/aplicacao/modelo/categoria.php');
-        $categoria_modelo = new CategoriaModelo($this->conexao);
-        $lista_categorias = $categoria_modelo->todos();
-
-        $categoria_secao = "<select id=\"categoria\" name=\"categoria\" autofocus>";
-        $categoria_secao .= "<option value=0 selected=\"selected\">---Selecionar---</option>\n";
-        if (pg_affected_rows($lista_categorias) <> 0) {
-            while ($row = recuperar_tuplas($lista_categorias)) {
-                $categoria_secao .= "<option value=$row[0]";
-                if ($categoria == $row[0]) {
-                    $categoria_secao .= " selected=\"selected\" ";
-                }
-                $categoria_secao .= ">$row[1]</option>\n";
-            }
-        }
-        $categoria_secao .= "</select>\n";
-
-        return $categoria_secao;
     }
 
     public function inserir() {
@@ -73,9 +55,17 @@ class PontuacaoControle extends Controle {
         $this->associar_visao('pontuacao/inserir');
         $this->visao->substituir_secao_arquivo('{MENU}', 'menu.htm');
 
-        $categoria_secao = $this->monta_dropdown_categoria($categoria);
-        $this->visao->substituir_secao('{CATEGORIA}', $categoria_secao);
+        // Preenche combobox de categorias
+        $categorias_html = '';
+        $categorias = $this->modelo_categoria->todos();
+        while ($tupla = recuperar_tuplas($categorias)) {
+            $categorias_html .= "<option value=\"$tupla[0]\" {SELECTED$tupla[0]}>$tupla[1]</option>\n";
+        }
+        $this->visao->substituir_secao('{CATEGORIAS}', $categorias_html);
 
+        if (!$erros['categoria']) {
+            $this->visao->substituir_secao('{SELECTED' . $categoria . '}', 'selected');
+        }
         if (!$erros['colocacao']) {
             $this->visao->substituir_secao('{COLOCACAO}', $colocacao);
         }
@@ -138,6 +128,14 @@ class PontuacaoControle extends Controle {
             $this->associar_visao('pontuacao/editar');
             $this->visao->substituir_secao_arquivo('{MENU}', 'menu.htm');
 
+            // Preenche combobox de categorias
+            $categorias_html = '';
+            $categorias = $this->modelo_categoria->todos();
+            while ($tupla = recuperar_tuplas($categorias)) {
+                $categorias_html .= "<option value=\"$tupla[0]\" {SELECTED$tupla[0]}>$tupla[1]</option>\n";
+            }
+            $this->visao->substituir_secao('{CATEGORIAS}', $categorias_html);
+
             // TODO: Alterar o foco para campo com problema.
             if ($erros['categoria']) {
                 $this->visao->substituir_secao('{ERRO}', "<p class=\"erro\">Categoria não pode ser vazia!</p>\n");
@@ -151,9 +149,8 @@ class PontuacaoControle extends Controle {
             $this->visao->substituir_secao('{ID}', $id);
             $this->visao->substituir_secao('{COLOCACAO}', $colocacao);
             $this->visao->substituir_secao('{PONTOS}', $pontos);
-
-            $categoria_secao = $this->monta_dropdown_categoria($categoria);
-            $this->visao->substituir_secao('{CATEGORIA}', $categoria_secao);
+            $this->visao->substituir_secao('{SELECTED' . $categoria . '}', 'selected');
+            
             $this->visao->gerar();
         }
     }

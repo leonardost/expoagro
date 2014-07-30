@@ -5,7 +5,10 @@
     <h1>Inserir Pontuação</h1>
         
     <form action="#" method="post">
-        <label for="categoria">Categoria</label> {CATEGORIA}<br>
+        <label for="categoria">Categoria</label>
+        <select id="categoria" name="categoria" autofocus>
+            {CATEGORIAS}
+        </select><br>
         <label for="colocacao">Colocação</label> <input type="text" id="colocacao" name="colocacao" value="{COLOCACAO}" maxlength="1"><br>
         <label for="pontos">Pontos</label> <input type="text" id="pontos" name="pontos" value="{PONTOS}" maxlength="3"><br>
         {ERRO}
