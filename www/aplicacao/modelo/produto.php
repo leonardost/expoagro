@@ -32,7 +32,7 @@ class ProdutoModelo {
     }
 
     public function todos() {
-        return executar_sql($this->conexao, "SELECT id, nome, categoria FROM produto ORDER BY nome");
+        return executar_sql($this->conexao, "SELECT p.id, p.nome, c.nome FROM produto p LEFT OUTER JOIN categoria c ON p.categoria = c.id ORDER BY p.nome");
     }
 
     public function buscar($id) {

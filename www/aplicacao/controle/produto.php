@@ -168,8 +168,6 @@ class ProdutoControle extends Controle {
                         <td><a href=\"/produto/editar/$row[0]/\">Editar</a></td>
                         <td><a href=\"/produto/remover/$row[0]/\">Remover</a></td>
                     </tr>\n";
-                    // TODO: Ao invés de mostrar o ID da categoria, mostrar o seu nome
-                    //       Guardar todas as categorias em um array associativo
             }
         }
         $conteudo .= "</table>\n";
