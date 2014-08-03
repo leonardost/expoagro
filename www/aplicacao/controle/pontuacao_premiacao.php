@@ -56,11 +56,11 @@ class PontuacaoPremiacaoControle extends Controle {
         }
         else {
             $html_lista_categorias_colocacoes = "<select id=\"pontuacao\" name=\"pontuacao\">\n";
-            while ($row = recuperar_tuplas($lista_pontuacoes)) {
-                $id = $row[0];
-                $categoria = $row[1];
-                $colocacao = $row[2];
-                $pontos = $row[3];
+            while ($tupla = recuperar_tuplas($lista_pontuacoes)) {
+                $id = $tupla[0];
+                $categoria = $tupla[1];
+                $colocacao = $tupla[2];
+                //$pontos = $tupla[3];
                 $html_lista_categorias_colocacoes .= "<option value=\"$id\">$categoria - $colocacao</option>\n";
             }
             $html_lista_categorias_colocacoes .= "</select>\n";
@@ -76,10 +76,10 @@ class PontuacaoPremiacaoControle extends Controle {
         }
         else {
             $html_lista_premiacoes = "<table><tr><th></th><th>Prêmio</th><th>Valor</th><th>Quantidade</th></tr>\n";
-            while ($row = recuperar_tuplas($lista_premiacoes)) {
-                $id = $row[0];
-                $premio = $row[1];
-                $valor = $row[2];
+            while ($tupla = recuperar_tuplas($lista_premiacoes)) {
+                $id = $tupla[0];
+                $premio = $tupla[1];
+                $valor = $tupla[2];
                 $html_lista_premiacoes .= "
                 <tr>
                     <td><input id=\"premiacao$id\" name=\"premiacao$id\" type=\"checkbox\"></td>
@@ -133,8 +133,8 @@ class PontuacaoPremiacaoControle extends Controle {
         // Recupera qual é a categoria e a colocação que estamos editando
 
         $categoria = $this->modelo->buscar_pontuacao($pontuacao);
-        $row = recuperar_tuplas($categoria);
-        $html_categoria_colocacao = $row[0] . ' ' . $row[1];
+        $tupla = recuperar_tuplas($categoria);
+        $html_categoria_colocacao = $tupla[0] . ' ' . $tupla[1];
 
         // Gera a tabela de premiações, selecionando os itens já associados
 
@@ -148,16 +148,16 @@ class PontuacaoPremiacaoControle extends Controle {
             // Recupera os itens já associados com esta categoria e colocação
             $lista_premiacoes_associadas = $this->modelo->todos_pontuacao($pontuacao);
             $premios_associados = array();
-            while ($row = recuperar_tuplas($lista_premiacoes_associadas)) {
-                $premios_associados[$row[0]] = $row[1];
+            while ($tupla = recuperar_tuplas($lista_premiacoes_associadas)) {
+                $premios_associados[$tupla[0]] = $tupla[1];
             }
 
             // Gera a tabela de premiações, selecionando as que já estão associadas
             $html_lista_premiacoes = "<table><tr><th></th><th>Prêmio</th><th>Valor</th><th>Quantidade</th></tr>\n";
-            while ($row = recuperar_tuplas($lista_premiacoes)) {
-                $id = $row[0];
-                $premio = $row[1];
-                $valor = $row[2];
+            while ($tupla = recuperar_tuplas($lista_premiacoes)) {
+                $id = $tupla[0];
+                $premio = $tupla[1];
+                $valor = $tupla[2];
                 $checked = '';
                 $quantidade = 0;
                 if (array_key_exists($id, $premios_associados)) {
@@ -200,12 +200,12 @@ class PontuacaoPremiacaoControle extends Controle {
         else {
             $conteudo .= "<table>";
             $lista_premios_por_categoria_colocacao = array();
-            while ($row = recuperar_tuplas($lista_pontuacoes_premiacoes)) {
-                $id = $row[0];
-                $categoria = $row[1];
-                $colocacao = $row[2];
-                $premio = $row[4];
-                $quantidade = $row[5];
+            while ($tupla = recuperar_tuplas($lista_pontuacoes_premiacoes)) {
+                $id = $tupla[0];
+                $categoria = $tupla[1];
+                $colocacao = $tupla[2];
+                $premio = $tupla[4];
+                $quantidade = $tupla[5];
                 if (!array_key_exists($id, $lista_premios_por_categoria_colocacao)) {
                     $lista_premios_por_categoria_colocacao[$id] = array();
                     $lista_premios_por_categoria_colocacao[$id]['premios'] = array();

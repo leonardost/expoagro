@@ -41,7 +41,7 @@ class PontuacaoPremiacaoModelo {
     public function buscar_pontuacao($id) {
         return $resultado = executar_sql($this->conexao,
             "SELECT ca.nome, po.colocacao
-            FROM pontuacao po, categoria ca, pontuacao_premiacao pp
+            FROM pontuacao po, categoria ca
             WHERE po.id = $id AND ca.id = po.categoria");
     }
 
