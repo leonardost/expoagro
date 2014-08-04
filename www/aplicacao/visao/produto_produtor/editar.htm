@@ -1,0 +1,18 @@
+<section>
+
+    {MENU}
+
+    <h1>Editar Produto x Produtor</h1>
+
+    <form action="#" method="post">
+        <p>Produtor: <b>{PRODUTOR}</b></p>
+        <p>Produtos:</p>
+        {LISTA_PRODUTOS}
+        {ERRO}
+        <input type="hidden" name="produtor" value="{ID_PRODUTOR}">
+        <input type="submit" value="Salvar">
+    </form>
+
+    <a href="/produto_produtor/">Cancelar</a>
+
+</section>
